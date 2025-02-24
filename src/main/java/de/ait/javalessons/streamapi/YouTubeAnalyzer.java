@@ -22,7 +22,7 @@ public class YouTubeAnalyzer {
         //System.out.println(getUniqueCategories());
         //System.out.println(getTitlesUpperCase());
         //System.out.println(getTop3MostLikelyVideos());
-        System.out.println(isMore10M());
+        System.out.println(isMore10M(videos));
     }
     public static List<YoutubeVideo>  getsVideosMore1MView(){
         List<YoutubeVideo> videosMore1MViews = videos.stream()
@@ -63,7 +63,7 @@ public class YouTubeAnalyzer {
         return top3MostLikelyVideos;
     }
 
-    public static boolean isMore10M(){
+    public static boolean isMore10M(List<YoutubeVideo> videoList){
         boolean result = videos.stream()
                 .anyMatch(video -> video.getViews() > 10_000_000);
         return result;
