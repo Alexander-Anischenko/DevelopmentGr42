@@ -1,8 +1,11 @@
 package de.ait.javalessons.controller;
 
 import de.ait.javalessons.model.Car;
+import de.ait.javalessons.repositories.CarRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -13,13 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SpringBootTest
 public class RestApiCarControllerTest {
+
     private RestApiCarController restApiCarController;
+
+    @Autowired
+    private CarRepository carRepository;
 
     // Инициализация контроллера перед каждым тестом с набором стандартных автомобилей
     @BeforeEach
-    public void setup() {
-        restApiCarController = new RestApiCarController(null);
+    void setUp() {
+        restApiCarController = new RestApiCarController(carRepository);
     }
 
     // Проверка, что метод getCars возвращает список автомобилей по умолчанию
@@ -34,7 +42,7 @@ public class RestApiCarControllerTest {
         resultCarsIterable.forEach(resultCars::add);
 
         // Проверяем количество и корректность первого элемента
-        assertEquals(4, resultCars.size());
+        assertEquals(5, resultCars.size());
         assertEquals("BMW M1", resultCars.get(0).getName());
     }
 
@@ -115,7 +123,7 @@ public class RestApiCarControllerTest {
         // и добавляя с помощью метода add в переменную resultCars
         resultCarsIterable.forEach(resultCars::add);
         // проверяем на соответствующее количество автомобилей
-        assertEquals(4, resultCars.size());
+        assertEquals(5, resultCars.size());
         // удаляем автомобиль с id 1
         restApiCarController.deleteCar("1");
         // Получаем список автомобилей после удаления
@@ -124,6 +132,6 @@ public class RestApiCarControllerTest {
         resultCars = new ArrayList<>();
         resultCarsIterableDeletedCars.forEach(resultCars::add);
         //проверяем количество автомобилей после удаления
-        assertEquals(3, resultCars.size());
+        assertEquals(4, resultCars.size());
     }
 }

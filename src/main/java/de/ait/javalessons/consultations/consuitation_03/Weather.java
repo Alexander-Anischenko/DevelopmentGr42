@@ -1,4 +1,4 @@
-package de.ait.consultations.consuitation_03;
+package de.ait.javalessons.consultations.consuitation_03;
 
 public class Weather {
     private String city;

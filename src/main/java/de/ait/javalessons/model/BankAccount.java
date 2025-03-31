@@ -5,22 +5,23 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity //1 Сущьность связанная с таблицей BankAccount в БД, при анотации @Table можно называть табл. по своему
 public class BankAccount {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id // Генерация ID автоматически из свободных в базе данных
+    @GeneratedValue(strategy = GenerationType.AUTO)// Указывает на генерацию ID по увеличкнию на 1 значение
+    // Поля
     private Long id;
 
-    private String accountNumber;
+    private String accountNumber; // String в связи сожидаемо большим количеством знаков(16)
 
     private String ownerName;
 
     private double balance;
 
 
-    public BankAccount() {
-
+    public BankAccount() {// Конструктор по умолчанию, необходим для JPA
+        // Default constructor, required for JPA
     }
 
     public BankAccount(String accountNumber, String ownerName, double balance) {

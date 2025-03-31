@@ -1,4 +1,4 @@
-package de.ait.consultations.consultation_04;
+package de.ait.javalessons.consultations.consultation_04;
 
 public class ParamTestMusterClass {
 

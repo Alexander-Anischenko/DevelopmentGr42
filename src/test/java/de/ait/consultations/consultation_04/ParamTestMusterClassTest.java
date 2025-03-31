@@ -1,5 +1,6 @@
 package de.ait.consultations.consultation_04;
 
+import de.ait.javalessons.consultations.consultation_04.ParamTestMusterClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

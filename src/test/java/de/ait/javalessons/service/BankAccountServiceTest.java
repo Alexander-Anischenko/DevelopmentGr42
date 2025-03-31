@@ -19,36 +19,37 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class BankAccountServiceTest {
 
-
     @Value("${bank.min-balance:0.0}")
     private double minBalance;
 
 
-    @Autowired
+    @Autowired // Внедрение зависимости сервиса банковских счетов
     private BankAccountService bankAccountService;
 
 
-    private BankAccount testAccount;
+    private BankAccount testAccount; // Переменная для хранения тестового банковского счета
 
-    private List<BankAccount> testBankAccounts;
+    private List<BankAccount> testBankAccounts; // Переменная для хранения списка всех тестовых банковских счетов
 
     @BeforeEach
     void setUp() {
-        testBankAccounts = bankAccountService.getAllBankAccounts();
-        testAccount = bankAccountService.getAllBankAccounts().get(0);
+        testBankAccounts = bankAccountService.getAllBankAccounts();  // Инициализируем список банковских счетов
+        testAccount = bankAccountService.getAllBankAccounts().get(0); // Берем первый счет из списка в качестве тестового
     }
 
     /* 1.***********************************get a list of all accounts****************************************** */
     @Test
-    @DisplayName("Получение всех банковских аакаунтов")
+    @DisplayName("Получение всех банковских аакаунтов") // анотация для описания, что делает тест
     void getAllBankAccountsTest() {
-
+        // Получаем размер списка банковских счетов, полученного в методе setUp()
         int sizeOfList = testBankAccounts.size();
+        // Проверяем, что размер списка, возвращаемого сервисом, соответствует ожидаемому размеру
         assertEquals(sizeOfList, bankAccountService.getAllBankAccounts().size());
-
+        // Получаем первый банковский счет из списка, возвращаемого сервисом
         BankAccount account = bankAccountService.getAllBankAccounts().get(0);
 
-        assertNotNull(account);
+        assertNotNull(account); // Проверяем, что полученный счет не равен null
+        // сравниваем id, номер счета, имя владельца баланс тестового аккаунта с полученным из сервиса
         assertEquals(testAccount.getId(), account.getId());
         assertEquals(testAccount.getAccountNumber(), account.getAccountNumber());
         assertEquals(testAccount.getOwnerName(), account.getOwnerName());
@@ -59,9 +60,13 @@ public class BankAccountServiceTest {
     /* 2.***********************************find an account by its id****************************************** */
     @Test
     void findBankAccountByIdTestSuccessfully() {
+        // получаем объект  Optional<BankAccount> из переменной testAccount с помощью метода findBankAccountById
         Optional<BankAccount> bankAccount = bankAccountService.findBankAccountById(testAccount.getId());
+        // проверяем на True наличие объекта
         assertTrue(bankAccount.isPresent());
+        // извлекаем номер счета из найденного банковского счета в переменную
         String accountNumber = bankAccount.get().getAccountNumber();
+        // сравниваем номер счета найденного счета с номером тестового счета, ожидаем совпадение
         assertEquals(testAccount.getAccountNumber(), accountNumber);
     }
 
@@ -75,13 +80,15 @@ public class BankAccountServiceTest {
     /* 3.***********************************open an account****************************************** */
     @Test
     void saveNewBankAccount() {
-        int oldSize = bankAccountService.getAllBankAccounts().size();
+        int oldSize = bankAccountService.getAllBankAccounts().size();// получаем количество всех аккаунтов
+        // создаеме тестовый аккаунт
         BankAccount testAccountToSave = new BankAccount("1011", "Bob Neumann", 11500.0);
 
 
-        BankAccount newBankAccount = bankAccountService.saveNewBankAccount(testAccountToSave);
-        int newSize = bankAccountService.getAllBankAccounts().size();
-        assertTrue(newSize == oldSize + 1);
+        BankAccount newBankAccount = bankAccountService.saveNewBankAccount(testAccountToSave); // сохраняем аккаунт в базе данных
+        int newSize = bankAccountService.getAllBankAccounts().size();// получаем новое количество всех аккаунтов
+        assertTrue(newSize == oldSize + 1);// проверяем на True новое  количество с старым + 1
+        // сравниваем созданный и сохраненный аккаунты
         assertEquals(testAccountToSave.getAccountNumber(), newBankAccount.getAccountNumber());
     }
     /* 4.***********************************deposit amount into account****************************************** */

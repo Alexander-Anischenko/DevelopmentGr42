@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Car { // Классописывает сущбность, которую можно использовать в базе данных
+public class Car { // Класс описывает сущность, которую можно использовать в базе данных
 
     @Id // Анотация ID говорит о том, что id будут генерироваться автоматически
     //поля

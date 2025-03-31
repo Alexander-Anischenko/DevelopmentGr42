@@ -1,4 +1,4 @@
-package de.ait.consultations.consuitation_03;
+package de.ait.javalessons.consultations.consuitation_03;
 
 import java.util.List;
 import java.util.stream.Collectors;

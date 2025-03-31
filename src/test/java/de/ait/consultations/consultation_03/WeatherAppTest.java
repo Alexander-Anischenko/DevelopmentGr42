@@ -1,8 +1,7 @@
 package de.ait.consultations.consultation_03;
 
-import de.ait.consultations.consuitation_03.Weather;
-import de.ait.consultations.consuitation_03.WeatherApp;
-import org.junit.jupiter.api.AfterEach;
+import de.ait.javalessons.consultations.consuitation_03.Weather;
+import de.ait.javalessons.consultations.consuitation_03.WeatherApp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
